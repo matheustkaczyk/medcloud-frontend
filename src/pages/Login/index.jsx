@@ -6,7 +6,6 @@ import SignIn from '../../components/SignIn';
 
 const Login = () => {
   const [signUp, setSignup] = useState(false);
-  console.log(signUp)
   return (
     <>
       <CssBaseline />
