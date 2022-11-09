@@ -1,5 +1,5 @@
 import { CssBaseline, Grid, Paper, Box, Typography, TextField, FormControlLabel, Button, Checkbox, Link } from "@mui/material";
-import Logo from "../../assets/medcloud.svg";
+import Logo from "../../../assets/medcloud.svg";
 
 const Login = () => {
   return (
