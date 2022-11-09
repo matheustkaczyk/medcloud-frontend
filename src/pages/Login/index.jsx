@@ -1,8 +1,24 @@
+import { CssBaseline, Grid } from "@mui/material";
+
 const Login = () => {
   return (
-    <div>
-      <h1>PÁGINA DE LOGIN</h1>
-    </div>
+    <>
+      <CssBaseline />
+      <Grid container component='main' sx={{ height: '100vh' }}>
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={6}
+          sx={{
+            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+      </Grid>
+    </>
   )
 }
 
