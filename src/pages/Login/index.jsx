@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CssBaseline, Grid } from "@mui/material";
 
 import SignIn from '../../components/SignIn';
+import SignUp from "../../components/SignUp";
 
 const Login = () => {
   const [signUp, setSignup] = useState(false);
@@ -24,7 +25,7 @@ const Login = () => {
           }}
         />
         {
-          signUp ? <h1>signup</h1> : <SignIn setSignUp={setSignup} />
+          signUp ? <SignUp /> : <SignIn setSignUp={setSignup} />
         }
       </Grid>
     </>
