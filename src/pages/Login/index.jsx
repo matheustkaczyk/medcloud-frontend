@@ -21,7 +21,6 @@ const Login = () => {
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            height: '100vh',
           }}
         />
         {

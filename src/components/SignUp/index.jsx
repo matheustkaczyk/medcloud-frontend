@@ -38,7 +38,7 @@ const SignUp = ({ setSignUp }) => {
             </Typography>
             <Box
               component='form'
-              sx={{ mt: 1, width: '80%' }}
+              sx={{ mt: 1, width: '80%', mb: 1 }}
             >
               <TextField
                 margin='normal'
@@ -94,7 +94,6 @@ const SignUp = ({ setSignUp }) => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
               >
                 Sign Up
               </Button>
