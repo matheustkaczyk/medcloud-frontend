@@ -1,7 +1,7 @@
 import { Grid, Paper, Box, Typography, TextField, FormControlLabel, Button, Checkbox, Link } from "@mui/material";
 import Logo from "../../assets/medcloud.svg";
 
-const SignIn = ({ setSignUp, signInState }) => {
+const SignIn = ({ setSignUp, signInState, handleSignIn }) => {
   const { signInForms, setSignInForms } = signInState;
 
   return (
@@ -74,6 +74,7 @@ const SignIn = ({ setSignUp, signInState }) => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={(e) => handleSignIn(e)}
               >
                 Sign In
               </Button>
