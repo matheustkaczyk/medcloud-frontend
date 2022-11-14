@@ -1,7 +1,7 @@
 import { Grid, Paper, Box, Typography, TextField, FormControlLabel, Button, Checkbox, Link } from "@mui/material";
 import Logo from "../../assets/medcloud.svg";
 
-const SignIn = ({ setSignUp, signInState, handleSignIn }) => {
+const SignIn = ({ setSignUp, signInState, handleSignIn, hasError }) => {
   const { signInForms, setSignInForms } = signInState;
 
   return (
@@ -65,6 +65,7 @@ const SignIn = ({ setSignUp, signInState, handleSignIn }) => {
                 autoComplete="current-password"
                 onChange={(e) => setSignInForms({ ...signInForms, password: e.target.value })}
               />
+              {hasError && <Typography color='error'>Incorrect email or password</Typography>}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
