@@ -12,7 +12,8 @@ const Management = () => {
             component="img"
             sx={{
               width: "22%",
-              padding: "1%"
+              padding: "1%",
+              minWidth: "120px",
             }}
             alt="logo"
             src={logo}
