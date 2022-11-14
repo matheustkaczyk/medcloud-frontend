@@ -1,39 +1,11 @@
-import { AppBar, CssBaseline, TextField, Toolbar, Typography, } from "@mui/material";
-import { Box } from "@mui/system";
-import LogoutIcon from '@mui/icons-material/Logout';
-
-import logo from '../../assets/medcloud.svg';
+import { CssBaseline } from "@mui/material";
+import Header from "../../components/Header";
 
 const Management = () => {
   return (
     <>
       <CssBaseline />
-      <AppBar position="fixed">
-        <Toolbar>
-          <Box
-            component="img"
-            sx={{
-              width: "22%",
-              padding: "1%",
-              minWidth: "120px",
-            }}
-            alt="logo"
-            src={logo}
-          />
-          <TextField
-            label="Search"
-            variant="filled"
-            margin="normal"
-            sx={{
-              width: "50%",
-              marginLeft: "10%",
-              borderRadius: "5px",
-              backgroundColor: "#ffffff"
-            }}
-          />
-          <LogoutIcon sx={{ marginLeft: "15%", cursor: "pointer" }} />
-        </Toolbar>
-      </AppBar>
+      <Header />
     </>
   )
 }
