@@ -9,29 +9,31 @@ import SignUp from "../../components/SignUp";
 
 const Login = () => {
   const [signUp, setSignup] = useState(false);
+  const [error, setError] = useState(false);
   const [signInForms, setSignInForms] = useState({
     email: '',
     password: '',
   });
 
+  const navigate = useNavigate();
+
   const handleSignUp = () => {
 
   }
 
-  const navigate = useNavigate();
-
   const handleSignIn = async (e) => {
     e.preventDefault();
 
-    if (!(signInForms.email === '') || !(signInForms.password === '')) {
+    if (signInForms.email != '' || signInForms.password != '') {
       await axios.post('http://localhost:3000/signin', signInForms)
         .then((response) => {
+          setError(false);
           localStorage.setItem('token', response.data.token);
 
           return navigate('/');
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          setError(true);
         });
     } else {
       alert('All fields are required');
@@ -55,7 +57,12 @@ const Login = () => {
           }}
         />
         {
-          signUp ? <SignUp /> : <SignIn setSignUp={setSignup} signInState={{ signInForms, setSignInForms }} handleSignIn={handleSignIn} />
+          signUp ? <SignUp /> : <SignIn
+            setSignUp={setSignup}
+            signInState={{ signInForms, setSignInForms }}
+            handleSignIn={handleSignIn}
+            hasError={error}
+          />
         }
       </Grid>
     </>
