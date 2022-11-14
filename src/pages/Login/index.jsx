@@ -13,13 +13,23 @@ const Login = () => {
     password: '',
   });
 
-  const handleSignUp = () => { }
-
-  const handleSignIn = () => {
+  const handleSignUp = () => {
 
   }
 
-  console.log(signInForms);
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+
+    if (!(signInForms.email === '') || !(signInForms.password === '')) {
+      await axios.post('http://localhost:3000/signin', signInForms)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
 
   return (
     <>
@@ -38,7 +48,7 @@ const Login = () => {
           }}
         />
         {
-          signUp ? <SignUp /> : <SignIn setSignUp={setSignup} signInState={{ signInForms, setSignInForms }} />
+          signUp ? <SignUp /> : <SignIn setSignUp={setSignup} signInState={{ signInForms, setSignInForms }} handleSignIn={handleSignIn} />
         }
       </Grid>
     </>
