@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { CssBaseline, Grid } from "@mui/material";
 import axios from 'axios';
@@ -17,17 +18,23 @@ const Login = () => {
 
   }
 
+  const navigate = useNavigate();
+
   const handleSignIn = async (e) => {
     e.preventDefault();
 
     if (!(signInForms.email === '') || !(signInForms.password === '')) {
       await axios.post('http://localhost:3000/signin', signInForms)
         .then((response) => {
-          console.log(response);
+          localStorage.setItem('token', response.data.token);
+
+          return navigate('/');
         })
         .catch((error) => {
           console.log(error);
         });
+    } else {
+      alert('All fields are required');
     }
   }
 
