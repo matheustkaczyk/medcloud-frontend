@@ -1,7 +1,9 @@
-import { Grid, Paper, Box, Typography, TextField, FormControlLabel, Button, Checkbox, Link } from "@mui/material";
+import { Grid, Box, Typography, TextField, Button } from "@mui/material";
 import Logo from "../../assets/medcloud.svg";
 
-const SignUp = ({ setSignUp }) => {
+const SignUp = ({ signUpState, handleSignUp }) => {
+  const { signUpForms, setSignUpForms } = signUpState;
+
   return (
     <>
       <Grid
@@ -49,6 +51,7 @@ const SignUp = ({ setSignUp }) => {
                 name='firstName'
                 autoComplete='First name'
                 autoFocus
+                onChange={(e) => setSignUpForms({ ...signUpForms, firstName: e.target.value })}
               />
               <TextField
                 margin='normal'
@@ -59,6 +62,7 @@ const SignUp = ({ setSignUp }) => {
                 name='lastName'
                 autoComplete='Last Name'
                 autoFocus
+                onChange={(e) => setSignUpForms({ ...signUpForms, lastName: e.target.value })}
               />
               <TextField
                 margin='normal'
@@ -69,6 +73,7 @@ const SignUp = ({ setSignUp }) => {
                 name='birthDate'
                 autoComplete='Birthdate'
                 autoFocus
+                onChange={(e) => setSignUpForms({ ...signUpForms, birthDate: e.target.value })}
               />
               <TextField
                 margin='normal'
@@ -79,6 +84,7 @@ const SignUp = ({ setSignUp }) => {
                 name='email'
                 autoComplete='email'
                 autoFocus
+                onChange={(e) => setSignUpForms({ ...signUpForms, email: e.target.value })}
               />
               <TextField
                 margin="normal"
@@ -89,11 +95,13 @@ const SignUp = ({ setSignUp }) => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => setSignUpForms({ ...signUpForms, password: e.target.value })}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
+                onClick={(e) => handleSignUp(e)}
               >
                 Sign Up
               </Button>
