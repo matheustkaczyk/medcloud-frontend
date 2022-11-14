@@ -1,7 +1,9 @@
 import { Grid, Paper, Box, Typography, TextField, FormControlLabel, Button, Checkbox, Link } from "@mui/material";
 import Logo from "../../assets/medcloud.svg";
 
-const SignIn = ({ setSignUp }) => {
+const SignIn = ({ setSignUp, signInState }) => {
+  const { signInForms, setSignInForms } = signInState;
+
   return (
     <>
       <Grid
@@ -50,6 +52,7 @@ const SignIn = ({ setSignUp }) => {
                 name='email'
                 autoComplete='email'
                 autoFocus
+                onChange={(e) => setSignInForms({ ...signInForms, email: e.target.value })}
               />
               <TextField
                 margin="normal"
@@ -60,6 +63,7 @@ const SignIn = ({ setSignUp }) => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => setSignInForms({ ...signInForms, password: e.target.value })}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
