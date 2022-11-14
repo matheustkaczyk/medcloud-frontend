@@ -1,12 +1,26 @@
 import { useState } from "react";
 
 import { CssBaseline, Grid } from "@mui/material";
+import axios from 'axios';
 
 import SignIn from '../../components/SignIn';
 import SignUp from "../../components/SignUp";
 
 const Login = () => {
   const [signUp, setSignup] = useState(false);
+  const [signInForms, setSignInForms] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleSignUp = () => { }
+
+  const handleSignIn = () => {
+
+  }
+
+  console.log(signInForms);
+
   return (
     <>
       <CssBaseline />
@@ -24,7 +38,7 @@ const Login = () => {
           }}
         />
         {
-          signUp ? <SignUp /> : <SignIn setSignUp={setSignup} />
+          signUp ? <SignUp /> : <SignIn setSignUp={setSignup} signInState={{ signInForms, setSignInForms }} />
         }
       </Grid>
     </>
