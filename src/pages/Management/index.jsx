@@ -1,5 +1,7 @@
 import { AppBar, CssBaseline, TextField, Toolbar, Typography, } from "@mui/material";
 import { Box } from "@mui/system";
+import LogoutIcon from '@mui/icons-material/Logout';
+
 import logo from '../../assets/medcloud.svg';
 
 const Management = () => {
@@ -29,6 +31,7 @@ const Management = () => {
               backgroundColor: "#ffffff"
             }}
           />
+          <LogoutIcon sx={{ marginLeft: "15%", cursor: "pointer" }} />
         </Toolbar>
       </AppBar>
     </>
