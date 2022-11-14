@@ -65,7 +65,7 @@ const SignIn = ({ setSignUp, signInState, handleSignIn, hasError }) => {
                 autoComplete="current-password"
                 onChange={(e) => setSignInForms({ ...signInForms, password: e.target.value })}
               />
-              {hasError && <Typography color='error'>Incorrect email or password</Typography>}
+              {hasError.error && <Typography color='error'>{hasError.message}</Typography>}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
