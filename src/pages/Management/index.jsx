@@ -43,12 +43,21 @@ const Management = () => {
     <>
       <CssBaseline />
       <Header handleLogout={handleLogout} />
-      <Typography variant="h4" sx={{ textAlign: "center" }}>
-        {manager.name && `Welcome ${manager.name.split(" ")[0]}!`}
-      </Typography>
-      <Container sx={{ width: "90vw", height: "70vh", backgroundColor: "#2E2E2E", borderRadius: "2px", marginTop: "4vh" }}>
+      <Box sx={
+        {
+          display: "flex", flexDirection: "row", justifyContent: "space-around", alignItems: "center", padding: ".5%", borderBottom: "1px solid grey", backgroundColor: "#D1A319"
+        }
+      }>
+        <Typography variant="h5">
+          {manager.name && `Welcome ${manager.name.split(" ")[0]}!`}
+        </Typography>
+        <Typography variant="overline">
+          Patient management
+        </Typography>
+      </Box>
+      <Box sx={{ width: "100vw", height: "100%", backgroundColor: "#2E2E2E", borderRadius: "2px" }}>
 
-      </Container>
+      </Box>
     </>
   )
 }
