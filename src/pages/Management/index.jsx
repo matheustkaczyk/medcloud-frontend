@@ -9,6 +9,8 @@ import Header from "../../components/Header";
 
 const Management = () => {
   const [manager, setManager] = useState({});
+  const [patientsData, setPatientsData] = useState([]);
+  const [error, setError] = useState({ error: false, message: '' });
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -31,12 +33,25 @@ const Management = () => {
         },
       }).then((response) => {
         setManager(response.data.user);
-      }).catch(() => {
-        handleLogout();
+      }).catch((err) => {
+        setError({ error: true, message: err.message });
       });
     };
 
-    validate();
+    async function getPatientsData() {
+      await axios.get("http://localhost:3000/patient", {
+        headers: {
+          Authorization: token,
+        },
+      }).then((response) => {
+        setPatientsData(response.data);
+      }).catch(() => {
+        handleLogout();
+      });
+    }
+
+    validate()
+      .then(() => getPatientsData());
   }, []);
 
   return (
