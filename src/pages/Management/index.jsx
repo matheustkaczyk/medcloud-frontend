@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { CssBaseline, Typography, Grid, Box } from "@mui/material";
-import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
+import { CssBaseline, Typography, Grid, Box } from "@mui/material";
 import { Container } from "@mui/system";
+import axios from "axios";
+
+import Header from "../../components/Header";
 
 const Management = () => {
   const [manager, setManager] = useState({});
