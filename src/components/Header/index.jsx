@@ -1,8 +1,9 @@
 import { AppBar, Box, TextField, Toolbar } from "@mui/material";
+
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from "../../assets/medcloud.svg";
 
-const Header = () => {
+const Header = ({ handleLogout }) => {
   return (
     <AppBar position="fixed">
       <Toolbar>
@@ -27,7 +28,10 @@ const Header = () => {
             backgroundColor: "#ffffff"
           }}
         />
-        <LogoutIcon sx={{ marginLeft: "15%", cursor: "pointer" }} />
+        <LogoutIcon
+          sx={{ marginLeft: "15%", cursor: "pointer" }}
+          onClick={() => handleLogout()}
+        />
       </Toolbar>
     </AppBar>
   );
