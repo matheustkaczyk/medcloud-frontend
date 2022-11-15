@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, Typography, Grid, Box } from "@mui/material";
 import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Container } from "@mui/system";
 
 const Management = () => {
-  const [id, setId] = useState("");
+  const [manager, setManager] = useState({});
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -27,7 +28,7 @@ const Management = () => {
           Authorization: token,
         },
       }).then((response) => {
-        setId(response.data.id);
+        setManager(response.data.user);
       }).catch(() => {
         handleLogout();
       });
@@ -40,6 +41,12 @@ const Management = () => {
     <>
       <CssBaseline />
       <Header handleLogout={handleLogout} />
+      <Typography variant="h4" sx={{ textAlign: "center" }}>
+        {manager.name && `Welcome ${manager.name.split(" ")[0]}!`}
+      </Typography>
+      <Container sx={{ width: "90vw", height: "70vh", backgroundColor: "#2E2E2E", borderRadius: "2px", marginTop: "4vh" }}>
+
+      </Container>
     </>
   )
 }
