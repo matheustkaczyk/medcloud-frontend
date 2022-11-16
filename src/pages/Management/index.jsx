@@ -1,17 +1,25 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { CssBaseline, Typography, Grid, Box } from "@mui/material";
+import { CssBaseline, Typography, Grid, Box, TextField, Button } from "@mui/material";
 import { Container } from "@mui/system";
+import AddIcon from '@mui/icons-material/Add';
 import axios from "axios";
 
 import Header from "../../components/Header";
+import TableComponent from '../../components/Table';
+import ModalComponent from "../../components/Modal";
 
 const Management = () => {
   const [manager, setManager] = useState({});
   const [patientsData, setPatientsData] = useState([]);
   const [error, setError] = useState({ error: false, message: '' });
+  const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
+
+  const handleOpenModal = () => setOpenModal(true);
+
+  const handleCloseModal = () => setOpenModal(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -54,25 +62,44 @@ const Management = () => {
       .then(() => getPatientsData());
   }, []);
 
+  const columns = [
+    "Id",
+    "Name",
+    "Email",
+    "Address",
+    "createdAt"
+  ]
+
   return (
     <>
       <CssBaseline />
       <Header handleLogout={handleLogout} />
-      <Box sx={
-        {
-          display: "flex", flexDirection: "row", justifyContent: "space-around", alignItems: "center", padding: ".5%", borderBottom: "1px solid grey", backgroundColor: "#D1A319"
-        }
-      }>
-        <Typography variant="h5">
-          {manager.name && `Welcome ${manager.name.split(" ")[0]}!`}
-        </Typography>
-        <Typography variant="overline">
-          Patient management
-        </Typography>
-      </Box>
-      <Box sx={{ width: "100vw", height: "100%", backgroundColor: "#2E2E2E", borderRadius: "2px" }}>
-
-      </Box>
+      <main>
+        <Box sx={
+          {
+            display: "flex", flexDirection: "row", justifyContent: "space-around", alignItems: "center", padding: ".5%", borderBottom: "1px solid grey", backgroundColor: "#166abd", color: "white"
+          }
+        }>
+          <Typography variant="h5">
+            {manager.name && `Welcome ${manager.name.split(" ")[0]}!`}
+          </Typography>
+          <Typography variant="overline">
+            Patient management
+          </Typography>
+        </Box>
+        <Container container sx={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", marginTop: "1vh" }} >
+          <AddIcon onClick={handleOpenModal} sx={{ width: "3%", height: "auto", backgroundColor: "#166abd", borderRadius: "50%", cursor: "pointer" }} />
+          <ModalComponent
+            open={openModal}
+            handleClose={handleCloseModal}
+          />
+        </Container>
+        <Container sx={{ width: "100%", height: "100%", borderRadius: "2px", marginTop: "1vh" }}>
+          {
+            <TableComponent columns={columns} />
+          }
+        </Container>
+      </main>
     </>
   )
 }
