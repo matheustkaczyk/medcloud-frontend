@@ -21,7 +21,7 @@ const TableComponent = ({ columns, data }) => {
         <TableBody>
           {
             data.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.id} hover>
                 <TableCell align="center" sx={{ fontWeight: "bolder" }}>{row.id}</TableCell>
                 <TableCell align="center">{row.name}</TableCell>
                 <TableCell align="center">{row.email}</TableCell>
