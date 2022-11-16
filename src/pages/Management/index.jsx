@@ -17,9 +17,9 @@ const Management = () => {
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
-  const handleOpenModal = () => setOpenModal(true);
+  const handleOpenCreatePatientModal = () => setOpenModal(true);
 
-  const handleCloseModal = () => setOpenModal(false);
+  const handleCloseCreatePatientModal = () => setOpenModal(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -72,6 +72,8 @@ const Management = () => {
     ""
   ]
 
+  const dataNames = ['First name', "Last name", "Email", "Address"];
+
   const modelStyle = {
     position: 'absolute',
     top: '50%',
@@ -105,24 +107,25 @@ const Management = () => {
           </Typography>
         </Box>
         <Container container sx={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", marginTop: "1vh" }} >
-          <AddIcon onClick={handleOpenModal} sx={{ width: "3%", height: "auto", backgroundColor: "#166abd", borderRadius: "50%", cursor: "pointer" }} />
+          <AddIcon onClick={handleOpenCreatePatientModal} sx={{ width: "3%", height: "auto", backgroundColor: "#166abd", borderRadius: "50%", cursor: "pointer" }} />
           <ModalComponent
             open={openModal}
-            handleClose={handleCloseModal}
+            handleClose={handleCloseCreatePatientModal}
           >
             <Box sx={modelStyle}>
-              <TextField
-                label="Name"
-              />
-              <TextField
-                label="Email"
-              />
-              <TextField
-                label="Description"
-              />
-              <TextField
-                label="Address"
-              />
+              <Typography variant="h5" sx={{ marginBottom: "2vh", textAlign: "center" }}>New patient</Typography>
+              {
+                dataNames.map((name, index) => {
+                  return (
+                    <TextField
+                      key={index}
+                      sx={{ marginBottom: "2vh" }}
+                      label={name}
+                      variant="filled"
+                    />
+                  )
+                })
+              }
               <Button
                 variant="contained"
                 color="success"
