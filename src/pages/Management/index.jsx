@@ -67,7 +67,9 @@ const Management = () => {
     "Name",
     "Email",
     "Address",
-    "createdAt"
+    "createdAt",
+    "",
+    ""
   ]
 
   return (
@@ -96,7 +98,7 @@ const Management = () => {
         </Container>
         <Container sx={{ width: "100%", height: "100%", borderRadius: "2px", marginTop: "1vh" }}>
           {
-            <TableComponent columns={columns} />
+            <TableComponent columns={columns} data={patientsData} />
           }
         </Container>
       </main>

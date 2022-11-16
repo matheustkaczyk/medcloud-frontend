@@ -1,7 +1,9 @@
 import { Paper, TableContainer, TableHead, TableRow, TableBody, TableCell } from "@mui/material";
 import Table from '@mui/material/Table';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-const TableComponent = ({ columns }) => {
+const TableComponent = ({ columns, data }) => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -16,6 +18,19 @@ const TableComponent = ({ columns }) => {
             }
           </TableRow>
         </TableHead>
+        <TableBody>
+          {
+            data.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell align="center">{row.id}</TableCell>
+                <TableCell align="center">{row.name}</TableCell>
+                <TableCell align="center">{row.email}</TableCell>
+                <TableCell align="center">{row.address}</TableCell>
+                <TableCell align="center">{row.createdAt}</TableCell>
+              </TableRow>
+            ))
+          }
+        </TableBody>
       </Table>
     </TableContainer>
   )
