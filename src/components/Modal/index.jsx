@@ -6,8 +6,6 @@ const ModalComponent = (props) => {
     <Modal
       open={props.open}
       onClose={props.handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
     >
       {
         props.children
