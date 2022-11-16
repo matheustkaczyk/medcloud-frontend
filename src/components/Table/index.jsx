@@ -10,8 +10,8 @@ const TableComponent = ({ columns, data }) => {
         <TableHead>
           <TableRow>
             {
-              columns.map((columnName) => (
-                <TableCell key={columnName} align="center" sx={{ backgroundColor: "lightgrey", color: "black", fontWeight: "550", borderRight: "solid white 1px" }}>
+              columns.map((columnName, index) => (
+                <TableCell key={(columnName + index)} align="center" sx={{ backgroundColor: "lightgrey", color: "black", fontWeight: "550", borderRight: "solid white 1px" }}>
                   {columnName}
                 </TableCell>
               ))
