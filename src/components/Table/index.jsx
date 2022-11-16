@@ -11,7 +11,7 @@ const TableComponent = ({ columns, data }) => {
           <TableRow>
             {
               columns.map((columnName) => (
-                <TableCell key={columnName} align="center" sx={{ backgroundColor: "lightgrey", color: "black", fontWeight: "400", borderRight: "solid white 1px" }}>
+                <TableCell key={columnName} align="center" sx={{ backgroundColor: "lightgrey", color: "black", fontWeight: "550", borderRight: "solid white 1px" }}>
                   {columnName}
                 </TableCell>
               ))
@@ -22,7 +22,7 @@ const TableComponent = ({ columns, data }) => {
           {
             data.map((row) => (
               <TableRow key={row.id}>
-                <TableCell align="center">{row.id}</TableCell>
+                <TableCell align="center" sx={{ fontWeight: "bolder" }}>{row.id}</TableCell>
                 <TableCell align="center">{row.name}</TableCell>
                 <TableCell align="center">{row.email}</TableCell>
                 <TableCell align="center">{row.address}</TableCell>
