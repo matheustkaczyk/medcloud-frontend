@@ -3,7 +3,7 @@ import Table from '@mui/material/Table';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const TableComponent = ({ columns, data }) => {
+const TableComponent = ({ columns, data, handleDelete }) => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -28,7 +28,7 @@ const TableComponent = ({ columns, data }) => {
                 <TableCell align="center">{row.address}</TableCell>
                 <TableCell align="center">{row.createdAt}</TableCell>
                 <TableCell align="center" sx={{ cursor: "pointer", color: "orange" }}><EditIcon /></TableCell>
-                <TableCell align="center" sx={{ cursor: "pointer", color: "red" }}><DeleteIcon /></TableCell>
+                <TableCell align="center" sx={{ cursor: "pointer", color: "red" }}><DeleteIcon onClick={() => handleDelete(row.id)} /></TableCell>
               </TableRow>
             ))
           }

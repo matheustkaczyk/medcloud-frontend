@@ -10,6 +10,8 @@ import Header from "../../components/Header";
 import TableComponent from '../../components/Table';
 import ModalComponent from "../../components/Modal";
 
+import forceRefresh from "../../utils/forceRefresh";
+
 const Management = () => {
   const [manager, setManager] = useState({});
   const [patientsData, setPatientsData] = useState([]);
@@ -52,6 +54,22 @@ const Management = () => {
       } catch (error) {
         setError({ error: true, message: error.response.data.message });
       }
+    }
+  }
+
+  const handleDeletePatient = async (id) => {
+    try {
+      const deleting = await axios.delete(`http://localhost:3000/patient/${id}`, {
+        headers: {
+          Authorization: localStorage.getItem("token")
+        }
+      });
+
+      alert("Patient deleted successfully");
+      forceRefresh();
+      return deleting;
+    } catch (error) {
+      setError({ error: true, message: error.response.data.message });
     }
   }
 
@@ -169,7 +187,7 @@ const Management = () => {
         </Container>
         <Container sx={{ width: "100%", height: "100%", borderRadius: "2px", marginTop: "1vh" }}>
           {
-            <TableComponent columns={columns} data={patientsData} />
+            <TableComponent columns={columns} data={patientsData} handleDelete={handleDeletePatient} />
           }
         </Container>
       </main>
