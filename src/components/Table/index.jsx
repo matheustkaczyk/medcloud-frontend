@@ -27,8 +27,8 @@ const TableComponent = ({ columns, data }) => {
                 <TableCell align="center">{row.email}</TableCell>
                 <TableCell align="center">{row.address}</TableCell>
                 <TableCell align="center">{row.createdAt}</TableCell>
-                <TableCell align="center" sx={{ cursor: "pointer" }}><EditIcon /></TableCell>
-                <TableCell align="center" sx={{ cursor: "pointer" }}><DeleteIcon /></TableCell>
+                <TableCell align="center" sx={{ cursor: "pointer", color: "orangered" }}><EditIcon /></TableCell>
+                <TableCell align="center" sx={{ cursor: "pointer", color: "red" }}><DeleteIcon /></TableCell>
               </TableRow>
             ))
           }
