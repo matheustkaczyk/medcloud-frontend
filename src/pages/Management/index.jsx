@@ -13,6 +13,7 @@ import ModalComponent from "../../components/Modal";
 const Management = () => {
   const [manager, setManager] = useState({});
   const [patientsData, setPatientsData] = useState([]);
+  const [newPatient, setNewPatient] = useState({});
   const [error, setError] = useState({ error: false, message: '' });
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
@@ -106,7 +107,7 @@ const Management = () => {
             Patient management
           </Typography>
         </Box>
-        <Container container sx={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", marginTop: "1vh" }} >
+        <Container sx={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", marginTop: "1vh" }} >
           <AddIcon onClick={handleOpenCreatePatientModal} sx={{ width: "3%", height: "auto", backgroundColor: "#166abd", borderRadius: "50%", cursor: "pointer" }} />
           <ModalComponent
             open={openModal}
@@ -122,6 +123,7 @@ const Management = () => {
                       sx={{ marginBottom: "2vh" }}
                       label={name}
                       variant="filled"
+                      onChange={(e) => setNewPatient({ ...newPatient, [name]: e.target.value })}
                     />
                   )
                 })
