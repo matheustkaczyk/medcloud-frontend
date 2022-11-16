@@ -13,7 +13,12 @@ import ModalComponent from "../../components/Modal";
 const Management = () => {
   const [manager, setManager] = useState({});
   const [patientsData, setPatientsData] = useState([]);
-  const [newPatient, setNewPatient] = useState({});
+  const [newPatient, setNewPatient] = useState({
+    Firstname: "",
+    Lastname: "",
+    Email: "",
+    Address: ""
+  });
   const [error, setError] = useState({ error: false, message: '' });
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
@@ -26,6 +31,28 @@ const Management = () => {
     localStorage.removeItem("token");
 
     return navigate("/login");
+  }
+
+  const handleCreatePatient = async () => {
+    if (newPatient.Firstname !== "" && newPatient.Lastname !== "" && newPatient.Email !== "" && newPatient.Address !== "") {
+      try {
+        const creating = await axios.post('http://localhost:3000/patient', {
+          firstName: newPatient.Firstname,
+          lastName: newPatient.Lastname,
+          email: newPatient.Email,
+          address: newPatient.Address
+        }, {
+          headers: {
+            Authorization: localStorage.getItem("token")
+          }
+        });
+
+        alert("Patient created successfully");
+        return creating;
+      } catch (error) {
+        setError({ error: true, message: error.response.data.message });
+      }
+    }
   }
 
   useEffect(() => {
@@ -113,7 +140,7 @@ const Management = () => {
             open={openModal}
             handleClose={handleCloseCreatePatientModal}
           >
-            <Box sx={modelStyle}>
+            <Box component="form" sx={modelStyle}>
               <Typography variant="h5" sx={{ marginBottom: "2vh", textAlign: "center" }}>New patient</Typography>
               {
                 dataNames.map((name, index) => {
@@ -123,7 +150,8 @@ const Management = () => {
                       sx={{ marginBottom: "2vh" }}
                       label={name}
                       variant="filled"
-                      onChange={(e) => setNewPatient({ ...newPatient, [name]: e.target.value })}
+                      required
+                      onChange={(e) => setNewPatient({ ...newPatient, [name.replace(' ', '')]: e.target.value })}
                     />
                   )
                 })
@@ -131,6 +159,8 @@ const Management = () => {
               <Button
                 variant="contained"
                 color="success"
+                onClick={() => handleCreatePatient()}
+                type="submit"
               >
                 Create
               </ Button>
