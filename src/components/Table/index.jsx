@@ -42,7 +42,7 @@ const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, sea
   }
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ height: "65vh" }}>
       <Table>
         <TableHead>
           <TableRow>
