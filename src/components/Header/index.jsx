@@ -17,17 +17,6 @@ const Header = ({ handleLogout }) => {
           alt="logo"
           src={logo}
         />
-        <TextField
-          label="Search"
-          variant="filled"
-          margin="normal"
-          sx={{
-            width: "50%",
-            marginLeft: "10%",
-            borderRadius: "5px",
-            backgroundColor: "#ffffff"
-          }}
-        />
         <LogoutIcon
           sx={{ marginLeft: "15%", cursor: "pointer" }}
           onClick={() => handleLogout()}
