@@ -120,7 +120,7 @@ const Management = () => {
 
   const dataNames = ['First name', "Last name", "Email", "Address"];
 
-  const modelStyle = {
+  const modalStyle = {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -158,7 +158,7 @@ const Management = () => {
             open={openModal}
             handleClose={handleCloseCreatePatientModal}
           >
-            <Box component="form" sx={modelStyle}>
+            <Box component="form" sx={modalStyle}>
               <Typography variant="h5" sx={{ marginBottom: "2vh", textAlign: "center" }}>New patient</Typography>
               {
                 dataNames.map((name, index) => {
@@ -187,7 +187,7 @@ const Management = () => {
         </Container>
         <Container sx={{ width: "100%", height: "100%", borderRadius: "2px", marginTop: "1vh" }}>
           {
-            <TableComponent columns={columns} data={patientsData} handleDelete={handleDeletePatient} />
+            <TableComponent columns={columns} data={patientsData} handleDelete={handleDeletePatient} modalStyle={modalStyle} setError={setError} />
           }
         </Container>
       </main>
