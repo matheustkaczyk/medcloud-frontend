@@ -23,6 +23,7 @@ const Management = () => {
   });
   const [error, setError] = useState({ error: false, message: '' });
   const [openModal, setOpenModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   const handleOpenCreatePatientModal = () => setOpenModal(true);
@@ -152,8 +153,20 @@ const Management = () => {
             Patient management
           </Typography>
         </Box>
-        <Container sx={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", marginTop: "1vh" }} >
-          <AddIcon onClick={handleOpenCreatePatientModal} sx={{ width: "3%", height: "auto", backgroundColor: "#166abd", borderRadius: "50%", cursor: "pointer" }} />
+        <Container sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around", alignItems: "center", marginTop: "1vh" }} >
+          <TextField
+            label="Search"
+            variant="filled"
+            margin="normal"
+            sx={{
+              width: "50%",
+              marginLeft: "10%",
+              borderRadius: "5px",
+              backgroundColor: "#ffffff"
+            }}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <AddIcon onClick={handleOpenCreatePatientModal} sx={{ width: "4%", height: "4%", backgroundColor: "#166abd", borderRadius: "50%", cursor: "pointer" }} />
           <ModalComponent
             open={openModal}
             handleClose={handleCloseCreatePatientModal}
@@ -187,7 +200,7 @@ const Management = () => {
         </Container>
         <Container sx={{ width: "100%", height: "100%", borderRadius: "2px", marginTop: "1vh" }}>
           {
-            <TableComponent columns={columns} data={patientsData} handleDelete={handleDeletePatient} modalStyle={modalStyle} setError={setError} />
+            <TableComponent columns={columns} data={patientsData} handleDelete={handleDeletePatient} modalStyle={modalStyle} setError={setError} searchTerm={searchTerm} />
           }
         </Container>
       </main>

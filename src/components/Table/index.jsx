@@ -7,7 +7,7 @@ import ModalComponent from "../Modal";
 import forceRefresh from "../../utils/forceRefresh";
 import axios from "axios";
 
-const TableComponent = ({ columns, data, handleDelete, modalStyle, setError }) => {
+const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, searchTerm }) => {
   const [openModal, setOpenModal] = useState(false);
   const [editedPatient, setEditedPatient] = useState({
     Firstname: "",
@@ -57,7 +57,7 @@ const TableComponent = ({ columns, data, handleDelete, modalStyle, setError }) =
         </TableHead>
         <TableBody>
           {
-            data.map((row) => (
+            data.filter((row) => row.name.includes(searchTerm) || row.last_name.includes(searchTerm) || row.email.includes(searchTerm) || row.address.includes(searchTerm)).map((row) => (
               <TableRow key={row.id} hover>
                 <TableCell align="center" sx={{ fontWeight: "bolder" }}>{row.id}</TableCell>
                 <TableCell align="center">{`${row.name} ${row.last_name}`}</TableCell>
