@@ -84,7 +84,7 @@ const SignIn = ({ setSignUp, signInState, handleSignIn, hasError }) => {
                   variant="body2"
                   ml={1}
                   onClick={() => setSignUp(true)}
-                  sx={{ cursor: 'pointer' }}
+                  sx={{ cursor: 'pointer', width: "fit-content" }}
                 >
                   Dont have an account?
                 </Link>
@@ -92,7 +92,7 @@ const SignIn = ({ setSignUp, signInState, handleSignIn, hasError }) => {
                   href="#"
                   variant="body2"
                   ml={1}
-                  sx={{ marginTop: '1vh' }}
+                  sx={{ marginTop: '1vh', width: "fit-content" }}
                 >
                   Forgot your password?
                 </Link>
