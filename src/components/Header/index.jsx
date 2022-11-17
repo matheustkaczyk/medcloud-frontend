@@ -6,7 +6,7 @@ import logo from "../../assets/medcloud.svg";
 const Header = ({ handleLogout }) => {
   return (
     <AppBar position="sticky">
-      <Toolbar>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-around", width: "100%" }}>
         <Box
           component="img"
           sx={{
