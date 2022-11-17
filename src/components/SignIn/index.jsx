@@ -79,21 +79,24 @@ const SignIn = ({ setSignUp, signInState, handleSignIn, hasError }) => {
               >
                 Sign In
               </Button>
-              <Link
-                variant="body2"
-                ml={1}
-                onClick={() => setSignUp(true)}
-                sx={{ cursor: 'pointer' }}
-              >
-                Dont have an account? Sign Up
-              </Link>
-              <Link
-                href="#"
-                variant="body2"
-                ml={1}
-              >
-                Forgot your password?
-              </Link>
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
+                <Link
+                  variant="body2"
+                  ml={1}
+                  onClick={() => setSignUp(true)}
+                  sx={{ cursor: 'pointer' }}
+                >
+                  Dont have an account?
+                </Link>
+                <Link
+                  href="#"
+                  variant="body2"
+                  ml={1}
+                  sx={{ marginTop: '1vh' }}
+                >
+                  Forgot your password?
+                </Link>
+              </Box>
             </Box>
           </Box>
         </Box>
