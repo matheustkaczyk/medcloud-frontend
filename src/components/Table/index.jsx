@@ -42,7 +42,7 @@ const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, sea
   }
 
   return (
-    <TableContainer component={Paper} sx={{ height: "65vh" }}>
+    <TableContainer component={Paper} sx={{ maxHeight: "65vh" }}>
       <Table>
         <TableHead>
           <TableRow>
@@ -64,8 +64,10 @@ const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, sea
                 <TableCell align="center">{row.email}</TableCell>
                 <TableCell align="center">{row.address}</TableCell>
                 <TableCell align="center">{row.createdAt}</TableCell>
-                <TableCell align="center" sx={{ cursor: "pointer", color: "orange" }} onClick={() => handleOpenModal()} ><EditIcon /></TableCell>
-                <TableCell align="center" sx={{ cursor: "pointer", color: "red" }}><DeleteIcon onClick={() => handleDelete(row.id)} /></TableCell>
+                <TableCell align="center" sx={{ display: "flex", justifyContent: "space-around" }}>
+                  <EditIcon onClick={() => handleOpenModal()} sx={{ cursor: "pointer", color: "orange" }} />
+                  <DeleteIcon onClick={() => handleDelete(row.id)} sx={{ cursor: "pointer", color: "red" }} />
+                </TableCell>
                 <ModalComponent open={openModal} handleClose={handleCloseModal}>
                   <Box component="form" sx={modalStyle}>
                     <h1>Edit patient</h1>
