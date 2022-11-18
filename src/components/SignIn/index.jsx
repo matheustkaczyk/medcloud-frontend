@@ -22,15 +22,16 @@ const SignIn = ({ setSignUp, signInState, handleSignIn, hasError }) => {
             alignItems: 'center',
           }}
         >
-          <Box sx={{
-            backgroundColor: '#ffffff',
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+          <Box
+            sx={{
+              backgroundColor: '#ffffff',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
             <img src={Logo} style={{ width: '18em', padding: '1%' }} />
             <Typography
               component='h1'
@@ -65,7 +66,6 @@ const SignIn = ({ setSignUp, signInState, handleSignIn, hasError }) => {
                 autoComplete="current-password"
                 onChange={(e) => setSignInForms({ ...signInForms, password: e.target.value })}
               />
-              {hasError.error && <Typography color='error'>{hasError.message}</Typography>}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
