@@ -76,7 +76,9 @@ const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, sea
                   <TableCell align="center">{`${row.name} ${row.last_name}`}</TableCell>
                   <TableCell align="center">{row.email}</TableCell>
                   <TableCell align="center">{row.address}</TableCell>
-                  <TableCell align="center">{row.createdAt}</TableCell>
+                  <TableCell align="center">{
+                    `${row.createdAt.split('T')[0]} at ${row.createdAt.split('T')[1].split('.')[0]}`
+                  }</TableCell>
                   <TableCell align="center" sx={{ display: "flex", justifyContent: "space-around" }}>
                     <EditIcon onClick={() => handleEdit(row.id, row.name, row.last_name, row.address)} sx={{ cursor: "pointer", color: "orange" }} />
                     <DeleteIcon onClick={() => handleDelete(row.id)} sx={{ cursor: "pointer", color: "red" }} />
