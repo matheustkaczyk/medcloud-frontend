@@ -166,7 +166,12 @@ const Management = () => {
             }}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <AddIcon onClick={handleOpenCreatePatientModal} sx={{ width: "4vw", height: "4vw", backgroundColor: "#166abd", borderRadius: "50%", cursor: "pointer" }} />
+          <Box onClick={handleOpenCreatePatientModal} sx={{ width: "fit-content", cursor: "pointer", display: "flex", justifyContent: "space-around", alignItems: "center", backgroundColor: "#115293", padding: ".5%", borderRadius: "5px" }} >
+            <AddIcon sx={{ color: "white" }} />
+            <Typography variant="overline" sx={{ color: "white" }}>
+              Add patient
+            </Typography>
+          </Box>
           <ModalComponent
             open={openModal}
             handleClose={handleCloseCreatePatientModal}
