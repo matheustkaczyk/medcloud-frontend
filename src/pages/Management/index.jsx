@@ -157,12 +157,12 @@ const Management = () => {
           <TextField
             label="Search"
             variant="filled"
-            margin="normal"
+            margin="dense"
+            size="small"
             sx={{
               width: "50%",
-              marginLeft: "10%",
               borderRadius: "5px",
-              backgroundColor: "#ffffff"
+              backgroundColor: "#ffffff",
             }}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
