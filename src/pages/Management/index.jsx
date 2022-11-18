@@ -9,8 +9,9 @@ import axios from "axios";
 import Header from "../../components/Header";
 import TableComponent from '../../components/Table';
 import ModalComponent from "../../components/Modal";
-
+import AlertComponent from "../../components/Alert";
 import forceRefresh from "../../utils/forceRefresh";
+import { AssignmentReturnSharp } from "@mui/icons-material";
 
 const Management = () => {
   const [manager, setManager] = useState({});
@@ -21,7 +22,7 @@ const Management = () => {
     Email: "",
     Address: ""
   });
-  const [error, setError] = useState({ error: false, message: '' });
+  const [alert, setAlert] = useState({ error: false, message: '', showAlert: false });
   const [openModal, setOpenModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -38,23 +39,25 @@ const Management = () => {
 
   const handleCreatePatient = async () => {
     if (newPatient.Firstname !== "" && newPatient.Lastname !== "" && newPatient.Email !== "" && newPatient.Address !== "") {
-      try {
-        const creating = await axios.post('http://localhost:3000/patient', {
-          firstName: newPatient.Firstname,
-          lastName: newPatient.Lastname,
-          email: newPatient.Email,
-          address: newPatient.Address
-        }, {
-          headers: {
-            Authorization: localStorage.getItem("token")
-          }
-        });
-
-        alert("Patient created successfully");
-        return creating;
-      } catch (error) {
-        setError({ error: true, message: error.response.data.message });
+      await axios.post('http://localhost:3000/patient', {
+        firstName: newPatient.Firstname,
+        lastName: newPatient.Lastname,
+        email: newPatient.Email,
+        address: newPatient.Address
+      }, {
+        headers: {
+          Authorization: localStorage.getItem("token")
+        }
+      }).then(() => {
+        return forceRefresh();
       }
+      ).catch((err) => {
+        setAlert({ error: true, message: err.response.data, showAlert: true });
+
+        setTimeout(() => {
+          setAlert({ error: false, message: '', showAlert: false });
+        }, 3000);
+      });
     }
   }
 
@@ -66,11 +69,18 @@ const Management = () => {
         }
       });
 
-      alert("Patient deleted successfully");
-      forceRefresh();
-      return deleting;
+      setAlert({ error: false, message: "Patient deleted successfully", showAlert: true });
+
+      setTimeout(() => {
+        setAlert({ error: false, message: "", showAlert: false });
+        forceRefresh();
+      }, 2000);
     } catch (error) {
-      setError({ error: true, message: error.response.data.message });
+      setAlert({ error: true, message: error.response.data.message, showAlert: true });
+
+      setTimeout(() => {
+        setAlert({ error: false, message: "", showAlert: false });
+      }, 2000);
     }
   }
 
@@ -89,7 +99,7 @@ const Management = () => {
       }).then((response) => {
         setManager(response.data.user);
       }).catch((err) => {
-        setError({ error: true, message: err.message });
+        setAlert({ error: true, message: err.message });
       });
     };
 
@@ -196,7 +206,7 @@ const Management = () => {
                 variant="contained"
                 color="success"
                 onClick={() => handleCreatePatient()}
-                type="submit"
+                type="button"
               >
                 Create
               </ Button>
@@ -205,9 +215,10 @@ const Management = () => {
         </Container>
         <Container sx={{ width: "100%", height: "100%", borderRadius: "2px", marginTop: "1vh" }}>
           {
-            <TableComponent columns={columns} data={patientsData} handleDelete={handleDeletePatient} modalStyle={modalStyle} setError={setError} searchTerm={searchTerm} />
+            <TableComponent columns={columns} data={patientsData} handleDelete={handleDeletePatient} modalStyle={modalStyle} setAlert={setAlert} searchTerm={searchTerm} />
           }
         </Container>
+        <AlertComponent error={alert.error} message={alert.message} showAlert={alert.showAlert} />
       </main>
     </>
   )
