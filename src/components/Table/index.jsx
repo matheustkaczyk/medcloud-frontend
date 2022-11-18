@@ -4,45 +4,15 @@ import Table from '@mui/material/Table';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModalComponent from "../Modal";
-import forceRefresh from "../../utils/forceRefresh";
-import axios from "axios";
 
-const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, searchTerm }) => {
+const TableComponent = ({ columns, data, handleDelete, handleEdit, modalStyle, setAlert, searchTerm, editedPatient, setEditedPatient }) => {
   const [openModal, setOpenModal] = useState(false);
-  const [editedPatient, setEditedPatient] = useState({
-    Id: "",
-    Firstname: "",
-    Lastname: "",
-    Address: ""
-  });
 
   const handleOpenModal = () => setOpenModal(true);
 
   const handleCloseModal = () => setOpenModal(false);
 
-  const handleEditPatient = async () => {
-    try {
-      const editing = await axios.put(`http://localhost:3000/patient/${editedPatient.Id}`, {
-        firstName: editedPatient.Firstname,
-        lastName: editedPatient.Lastname,
-        address: editedPatient.Address
-      }, {
-        headers: {
-          authorization: localStorage.getItem("token")
-        }
-      })
-        .then(() => {
-          forceRefresh();
-        });
-
-      alert("Patient edited successfully");
-      return editing;
-    } catch (error) {
-      setError({ error: true, message: error.response.data.message });
-    }
-  }
-
-  const handleEdit = (id, name, lastName, address) => {
+  const handleEditInfo = (id, name, lastName, address) => {
     setEditedPatient({
       Id: id,
       Firstname: name,
@@ -80,7 +50,7 @@ const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, sea
                     `${row.createdAt.split('T')[0]} at ${row.createdAt.split('T')[1].split('.')[0]}`
                   }</TableCell>
                   <TableCell align="center" sx={{ display: "flex", justifyContent: "space-around" }}>
-                    <EditIcon onClick={() => handleEdit(row.id, row.name, row.last_name, row.address)} sx={{ cursor: "pointer", color: "orange" }} />
+                    <EditIcon onClick={() => handleEditInfo(row.id, row.name, row.last_name, row.address)} sx={{ cursor: "pointer", color: "orange" }} />
                     <DeleteIcon onClick={() => handleDelete(row.id)} sx={{ cursor: "pointer", color: "red" }} />
                   </TableCell>
                 </TableRow>
@@ -119,7 +89,7 @@ const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, sea
                   type="submit"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleEditPatient();
+                    handleEdit();
                   }}
                 >
                   Edit

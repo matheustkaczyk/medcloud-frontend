@@ -11,7 +11,6 @@ import TableComponent from '../../components/Table';
 import ModalComponent from "../../components/Modal";
 import AlertComponent from "../../components/Alert";
 import forceRefresh from "../../utils/forceRefresh";
-import { AssignmentReturnSharp } from "@mui/icons-material";
 
 const Management = () => {
   const [manager, setManager] = useState({});
@@ -20,6 +19,12 @@ const Management = () => {
     Firstname: "",
     Lastname: "",
     Email: "",
+    Address: ""
+  });
+  const [editedPatient, setEditedPatient] = useState({
+    Id: "",
+    Firstname: "",
+    Lastname: "",
     Address: ""
   });
   const [alert, setAlert] = useState({ error: false, message: '', showAlert: false });
@@ -75,6 +80,28 @@ const Management = () => {
         setAlert({ error: false, message: "", showAlert: false });
         forceRefresh();
       }, 2000);
+    } catch (error) {
+      setAlert({ error: true, message: error.response.data.message, showAlert: true });
+
+      setTimeout(() => {
+        setAlert({ error: false, message: "", showAlert: false });
+      }, 2000);
+    }
+  }
+
+  const handleEditPatient = async () => {
+    try {
+      await axios.put(`http://localhost:3000/patient/${editedPatient.Id}`, {
+        firstName: editedPatient.Firstname,
+        lastName: editedPatient.Lastname,
+        address: editedPatient.Address
+      }, {
+        headers: {
+          authorization: localStorage.getItem("token")
+        }
+      });
+
+      return forceRefresh();
     } catch (error) {
       setAlert({ error: true, message: error.response.data.message, showAlert: true });
 
@@ -215,7 +242,7 @@ const Management = () => {
         </Container>
         <Container sx={{ width: "100%", height: "100%", borderRadius: "2px", marginTop: "1vh" }}>
           {
-            <TableComponent columns={columns} data={patientsData} handleDelete={handleDeletePatient} modalStyle={modalStyle} setAlert={setAlert} searchTerm={searchTerm} />
+            <TableComponent columns={columns} data={patientsData} handleDelete={handleDeletePatient} handleEdit={handleEditPatient} modalStyle={modalStyle} setAlert={setAlert} searchTerm={searchTerm} editedPatient={editedPatient} setEditedPatient={setEditedPatient} />
           }
         </Container>
         <AlertComponent error={alert.error} message={alert.message} showAlert={alert.showAlert} />
