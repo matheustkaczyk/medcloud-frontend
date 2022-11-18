@@ -56,7 +56,7 @@ const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, sea
   return (
     <TableContainer component={Paper} sx={{ maxHeight: "65vh" }}>
       <Table>
-        <TableHead>
+        <TableHead sx={{ position: "sticky", top: 0 }}>
           <TableRow>
             {
               columns.map((columnName, index) => (
