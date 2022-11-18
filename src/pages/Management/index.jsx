@@ -153,7 +153,7 @@ const Management = () => {
             Patient management
           </Typography>
         </Box>
-        <Container sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around", alignItems: "center", marginTop: "1vh" }} >
+        <Container sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: "1vh" }} >
           <TextField
             label="Search"
             variant="filled"
