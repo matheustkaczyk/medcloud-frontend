@@ -86,7 +86,7 @@ const SignIn = ({ setSignUp, signInState, handleSignIn, hasError }) => {
                   onClick={() => setSignUp(true)}
                   sx={{ cursor: 'pointer', width: "fit-content" }}
                 >
-                  Dont have an account?
+                  Don't have an account?
                 </Link>
                 <Link
                   href="#"
