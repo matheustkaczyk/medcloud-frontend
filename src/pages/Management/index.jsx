@@ -126,13 +126,14 @@ const Management = () => {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     height: "fit-content",
-    width: "90%",
+    width: "60%",
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
     display: "flex",
     flexDirection: "column",
+    borderRadius: "10px"
   };
 
   return (
