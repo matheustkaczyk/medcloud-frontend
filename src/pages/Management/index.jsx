@@ -177,7 +177,7 @@ const Management = () => {
             handleClose={handleCloseCreatePatientModal}
           >
             <Box component="form" sx={modalStyle}>
-              <Typography variant="h5" sx={{ marginBottom: "2vh", textAlign: "center" }}>New patient</Typography>
+              <Typography variant="h5" sx={{ marginBottom: "2vh" }}>New patient</Typography>
               {
                 dataNames.map((name, index) => {
                   return (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Paper, TableContainer, TableHead, TableRow, TableBody, TableCell, Box, TextField, Button } from "@mui/material";
+import { Paper, TableContainer, TableHead, TableRow, TableBody, TableCell, Box, TextField, Button, Typography } from "@mui/material";
 import Table from '@mui/material/Table';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -88,7 +88,7 @@ const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, sea
             }
             <ModalComponent open={openModal} handleClose={handleCloseModal}>
               <Box component="form" sx={modalStyle}>
-                <h1>Edit patient</h1>
+                <Typography variant="h5" sx={{ marginBottom: "1rem" }}>Edit patient</Typography>
                 <TextField
                   sx={{ marginBottom: "2vh" }}
                   label="Name"
