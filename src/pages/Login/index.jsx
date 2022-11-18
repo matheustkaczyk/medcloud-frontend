@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { CssBaseline, Grid } from "@mui/material";
@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import SignIn from '../../components/SignIn';
 import SignUp from "../../components/SignUp";
+import AlertComponent from "../../components/Alert";
 
 const Login = () => {
   const [signUp, setSignup] = useState(false);
@@ -67,6 +68,10 @@ const Login = () => {
         })
         .catch((err) => {
           setError({ error: true, message: err.response.data.error });
+          setTimeout(() => {
+            setError({ error: false, message: '' });
+          }
+            , 3000);
         });
     } else {
       alert('All fields are required');
@@ -101,6 +106,7 @@ const Login = () => {
           />
         }
       </Grid>
+      <AlertComponent error={error.error} message={error.message} />
     </>
   )
 }
