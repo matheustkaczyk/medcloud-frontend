@@ -58,7 +58,7 @@ const Login = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
 
-    if (signInForms.email != '' || signInForms.password != '') {
+    if (signInForms.email !== '' && signInForms.password !== '') {
       await axios.post('http://localhost:3000/signin', signInForms)
         .then((response) => {
           setError({ error: false, message: '' });
