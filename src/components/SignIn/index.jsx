@@ -1,7 +1,7 @@
 import { Grid, Paper, Box, Typography, TextField, FormControlLabel, Button, Checkbox, Link } from "@mui/material";
 import Logo from "../../assets/medcloud.svg";
 
-const SignIn = ({ setSignUp, signInState, handleSignIn, hasError }) => {
+const SignIn = ({ setSignUp, signInState, handleSignIn }) => {
   const { signInForms, setSignInForms } = signInState;
 
   return (

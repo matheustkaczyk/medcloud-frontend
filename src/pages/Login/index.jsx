@@ -39,13 +39,15 @@ const Login = () => {
             setError({ error: false, message: '' });
             setSignup(false);
 
-            return;
           })
           .catch((err) => {
-            setError({ error: true, message: err.response.data.message });
-            console.error(err);
+            console.log(err)
+            setError({ error: true, message: err.response.data.error });
 
-            return;
+            setTimeout(() => {
+              setError({ error: false, message: '' });
+            }, 3000);
+
           });
       } else {
         alert('Please fill all the fields');
@@ -70,8 +72,7 @@ const Login = () => {
           setError({ error: true, message: err.response.data.error });
           setTimeout(() => {
             setError({ error: false, message: '' });
-          }
-            , 3000);
+          }, 3000);
         });
     } else {
       alert('All fields are required');
@@ -102,7 +103,6 @@ const Login = () => {
             setSignUp={setSignup}
             signInState={{ signInForms, setSignInForms }}
             handleSignIn={handleSignIn}
-            hasError={error}
           />
         }
       </Grid>
