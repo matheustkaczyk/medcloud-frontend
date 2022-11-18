@@ -110,13 +110,12 @@ const Management = () => {
   }, []);
 
   const columns = [
-    "Id",
+    "ID",
     "Name",
-    "Email",
+    "E-mail",
     "Address",
-    "createdAt",
-    "",
-    ""
+    "Creation Date",
+    "Actions",
   ]
 
   const dataNames = ['First name', "Last name", "Email", "Address"];
