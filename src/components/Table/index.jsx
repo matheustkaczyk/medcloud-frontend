@@ -48,7 +48,7 @@ const TableComponent = ({ columns, data, handleDelete, modalStyle, setError, sea
           <TableRow>
             {
               columns.map((columnName, index) => (
-                <TableCell key={(columnName + index)} align="center" sx={{ backgroundColor: "yellowgreen", color: "black", fontWeight: "550", borderRight: "solid white 1px" }}>
+                <TableCell key={(columnName + index)} align="center" sx={{ backgroundColor: "#8cbae8", color: "black", fontWeight: "550", borderRight: "solid white 1px" }}>
                   {columnName}
                 </TableCell>
               ))
