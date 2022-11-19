@@ -10,6 +10,7 @@ import Header from "../../components/Header";
 import TableComponent from '../../components/Table';
 import ModalComponent from "../../components/Modal";
 import AlertComponent from "../../components/Alert";
+
 import forceRefresh from "../../utils/forceRefresh";
 
 const Management = () => {
@@ -68,18 +69,13 @@ const Management = () => {
 
   const handleDeletePatient = async (id) => {
     try {
-      const deleting = await axios.delete(`http://localhost:3000/patient/${id}`, {
+      await axios.delete(`http://localhost:3000/patient/${id}`, {
         headers: {
           Authorization: localStorage.getItem("token")
         }
       });
 
-      setAlert({ error: false, message: "Patient deleted successfully", showAlert: true });
-
-      setTimeout(() => {
-        setAlert({ error: false, message: "", showAlert: false });
-        forceRefresh();
-      }, 2000);
+      forceRefresh();
     } catch (error) {
       setAlert({ error: true, message: error.response.data.message, showAlert: true });
 
