@@ -45,25 +45,28 @@ const Management = () => {
 
   const handleCreatePatient = async () => {
     if (newPatient.Firstname !== "" && newPatient.Lastname !== "" && newPatient.Email !== "" && newPatient.Address !== "") {
-      await axios.post('http://localhost:3000/patient', {
-        firstName: newPatient.Firstname,
-        lastName: newPatient.Lastname,
-        email: newPatient.Email,
-        address: newPatient.Address
-      }, {
-        headers: {
-          Authorization: localStorage.getItem("token")
-        }
-      }).then(() => {
-        return forceRefresh();
-      }
-      ).catch((err) => {
-        setAlert({ error: true, message: err.response.data, showAlert: true });
+      try {
+        await axios.post('http://localhost:3000/patient', {
+          firstName: newPatient.Firstname,
+          lastName: newPatient.Lastname,
+          email: newPatient.Email,
+          address: newPatient.Address
+        }, {
+          headers: {
+            Authorization: localStorage.getItem("token")
+          }
+        });
 
-        setTimeout(() => {
-          setAlert({ error: false, message: '', showAlert: false });
-        }, 3000);
-      });
+        return forceRefresh();
+      } catch (error) {
+        setAlert({ error: true, message: error.response.data.error || error.response.data, showAlert: true });
+
+        return setTimeout(() => setAlert({ error: false, message: '', showAlert: false }), 3000);
+      }
+    } else {
+      setAlert({ error: true, message: 'Please fill all fields', showAlert: true });
+
+      return setTimeout(() => setAlert({ error: false, message: '', showAlert: false }), 3000);
     }
   }
 
