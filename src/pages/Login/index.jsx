@@ -10,7 +10,7 @@ import AlertComponent from "../../components/Alert";
 
 const Login = () => {
   const [signUp, setSignup] = useState(false);
-  const [error, setError] = useState({ error: false, message: '', showAlert: false });
+  const [error, setAlert] = useState({ error: false, message: '', showAlert: false });
 
   const [signInForms, setSignInForms] = useState({
     email: '',
@@ -35,18 +35,18 @@ const Login = () => {
       if (signUpForms.firstName !== '' && signUpForms.lastName !== '' && signUpForms.birthDate !== '' && signUpForms.email !== '' && signUpForms.password !== '') {
         await axios.post('http://localhost:3000/signup', signUpForms)
           .then(() => {
-            setError({ error: false, message: 'User sucessfully created', showAlert: true });
+            setAlert({ error: false, message: 'User sucessfully created', showAlert: true });
 
             return setTimeout(() => {
-              setError({ error: false, message: '', showAlert: false });
+              setAlert({ error: false, message: '', showAlert: false });
               return setSignup(false);
             }, 3000);
           })
           .catch((err) => {
-            setError({ error: true, message: err.response.data.error, showAlert: true });
+            setAlert({ error: true, message: err.response.data.error, showAlert: true });
 
             return setTimeout(() => {
-              setError({ error: false, message: '', showAlert: false });
+              setAlert({ error: false, message: '', showAlert: false });
             }, 3000);
           });
       } else {
@@ -61,24 +61,19 @@ const Login = () => {
     e.preventDefault();
 
     if (signInForms.email !== '' && signInForms.password !== '') {
-      await axios.post('http://localhost:3000/signin', signInForms)
-        .then((response) => {
-          setError({ error: false, message: '', showAlert: true });
-          localStorage.setItem('token', response.data.token);
+      try {
+        await axios.post('http://localhost:3000/signin', signInForms);
 
-          setTimeout(() => {
-            setError({ error: false, message: '', showAlert: false });
-            return navigate('/');
-          }, 3000);
-        })
-        .catch((err) => {
-          setError({ error: true, message: err.response.data.error, showAlert: true });
-          setTimeout(() => {
-            setError({ error: false, message: '', showAlert: false });
-          }, 3000);
-        });
+        setAlert({ error: false, message: '', showAlert: true });
+
+        localStorage.setItem('token', response.data.token);
+
+        return navigate('/');
+      } catch (err) {
+        return setAlert({ error: true, message: err.response.data.error, showAlert: true });
+      }
     } else {
-      alert('All fields are required');
+      return setAlert({ error: true, message: 'Please fill all the fields', showAlert: true });
     }
   }
 
@@ -109,7 +104,7 @@ const Login = () => {
           />
         }
       </Grid>
-      <AlertComponent error={error.error} message={error.message} showAlert={error.showAlert} />
+      <AlertComponent error={error.error} message={error.message} showAlert={error.showAlert} setAlert={setAlert} />
     </>
   )
 }
