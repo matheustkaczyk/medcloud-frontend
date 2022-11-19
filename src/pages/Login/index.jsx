@@ -53,14 +53,14 @@ const Login = () => {
 
     if (signInForms.email !== '' && signInForms.password !== '') {
       try {
-        await axios.post('http://localhost:3000/signin', signInForms);
+        const response = await axios.post('http://localhost:3000/signin', signInForms);
 
         setAlert({ error: false, message: '', showAlert: true });
 
         localStorage.setItem('token', response.data.token);
 
         return navigate('/');
-      } catch (err) {
+      } catch (error) {
         return setAlert({ error: true, message: error.response.data.error || error.response.data, showAlert: true });
       }
     } else {
