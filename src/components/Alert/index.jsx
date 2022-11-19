@@ -1,6 +1,7 @@
 import { Alert, Fade } from "@mui/material";
 
-const AlertComponent = ({ error, message, showAlert }) => {
+const AlertComponent = ({ error, message, showAlert, setAlert }) => {
+  setTimeout(() => setAlert({ error: false, message: '', showAlert: false }), 10000);
   return (
     <>
       {
