@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { CssBaseline, Grid } from "@mui/material";
@@ -31,29 +31,20 @@ const Login = () => {
     e.preventDefault();
     const birthDateValidationRegex = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
 
-    if (birthDateValidationRegex.test(signUpForms.birthDate)) {
-      if (signUpForms.firstName !== '' && signUpForms.lastName !== '' && signUpForms.birthDate !== '' && signUpForms.email !== '' && signUpForms.password !== '') {
-        await axios.post('http://localhost:3000/signup', signUpForms)
-          .then(() => {
-            setAlert({ error: false, message: 'User sucessfully created', showAlert: true });
-
-            return setTimeout(() => {
-              setAlert({ error: false, message: '', showAlert: false });
-              return setSignup(false);
-            }, 3000);
-          })
-          .catch((err) => {
-            setAlert({ error: true, message: err.response.data.error, showAlert: true });
-
-            return setTimeout(() => {
-              setAlert({ error: false, message: '', showAlert: false });
-            }, 3000);
-          });
-      } else {
-        alert('Please fill all the fields');
+    if (signUpForms.firstName !== '' && signUpForms.lastName !== '' && signUpForms.birthDate !== '' && signUpForms.email !== '' && signUpForms.password !== '') {
+      try {
+        if (birthDateValidationRegex.test(signUpForms.birthDate)) {
+          await axios.post('http://localhost:3000/signup', signUpForms)
+          setAlert({ error: false, message: 'User sucessfully created', showAlert: true });
+          return setSignup(false);
+        } else {
+          return setAlert({ error: true, message: 'Invalid birth date', showAlert: true });
+        }
+      } catch (error) {
+        return setAlert({ error: true, message: error.response.data.error || error.response.data, showAlert: true });
       }
     } else {
-      alert('Please enter a valid birth date');
+      setAlert({ error: true, message: 'Please fill all the fields', showAlert: true });
     }
   }
 
@@ -70,7 +61,7 @@ const Login = () => {
 
         return navigate('/');
       } catch (err) {
-        return setAlert({ error: true, message: err.response.data.error, showAlert: true });
+        return setAlert({ error: true, message: error.response.data.error || error.response.data, showAlert: true });
       }
     } else {
       return setAlert({ error: true, message: 'Please fill all the fields', showAlert: true });
