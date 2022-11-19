@@ -60,13 +60,9 @@ const Management = () => {
         return forceRefresh();
       } catch (error) {
         setAlert({ error: true, message: error.response.data.error || error.response.data, showAlert: true });
-
-        return setTimeout(() => setAlert({ error: false, message: '', showAlert: false }), 3000);
       }
     } else {
       setAlert({ error: true, message: 'Please fill all fields', showAlert: true });
-
-      return setTimeout(() => setAlert({ error: false, message: '', showAlert: false }), 3000);
     }
   }
 
@@ -80,11 +76,7 @@ const Management = () => {
 
       forceRefresh();
     } catch (error) {
-      setAlert({ error: true, message: error.response.data.message, showAlert: true });
-
-      setTimeout(() => {
-        setAlert({ error: false, message: "", showAlert: false });
-      }, 2000);
+      setAlert({ error: true, message: error.response.data.error || error.response.data, showAlert: true });
     }
   }
 
@@ -102,11 +94,7 @@ const Management = () => {
 
       return forceRefresh();
     } catch (error) {
-      setAlert({ error: true, message: error.response.data.message, showAlert: true });
-
-      setTimeout(() => {
-        setAlert({ error: false, message: "", showAlert: false });
-      }, 2000);
+      setAlert({ error: true, message: error.response.data.error || error.response.data, showAlert: true });
     }
   }
 
@@ -244,7 +232,7 @@ const Management = () => {
             <TableComponent columns={columns} data={patientsData} handleDelete={handleDeletePatient} handleEdit={handleEditPatient} modalStyle={modalStyle} setAlert={setAlert} searchTerm={searchTerm} editedPatient={editedPatient} setEditedPatient={setEditedPatient} />
           }
         </Container>
-        <AlertComponent error={alert.error} message={alert.message} showAlert={alert.showAlert} />
+        <AlertComponent error={alert.error} message={alert.message} showAlert={alert.showAlert} setAlert={setAlert} />
       </main>
     </>
   )
