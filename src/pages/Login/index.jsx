@@ -34,7 +34,7 @@ const Login = () => {
     if (signUpForms.firstName !== '' && signUpForms.lastName !== '' && signUpForms.birthDate !== '' && signUpForms.email !== '' && signUpForms.password !== '') {
       try {
         if (birthDateValidationRegex.test(signUpForms.birthDate)) {
-          await axios.post('https://15.228.220.238:3000/signup', signUpForms)
+          await axios.post('http://15.228.220.238:3000/signup', signUpForms)
           setAlert({ error: false, message: 'User sucessfully created', showAlert: true });
           return setSignup(false);
         } else {
@@ -53,7 +53,7 @@ const Login = () => {
 
     if (signInForms.email !== '' && signInForms.password !== '') {
       try {
-        const response = await axios.post('https://15.228.220.238:3000/signin', signInForms);
+        const response = await axios.post('http://15.228.220.238:3000/signin', signInForms);
 
         setAlert({ error: false, message: '', showAlert: true });
 
