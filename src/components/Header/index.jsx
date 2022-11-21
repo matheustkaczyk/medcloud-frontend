@@ -1,7 +1,7 @@
 import { AppBar, Box, TextField, Toolbar } from "@mui/material";
 
 import LogoutIcon from '@mui/icons-material/Logout';
-import logo from "../../assets/medcloud.svg";
+import logo from "/assets/medcloud.svg";
 
 const Header = ({ handleLogout }) => {
   return (
