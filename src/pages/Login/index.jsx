@@ -59,11 +59,8 @@ const Login = () => {
 
         localStorage.setItem('token', response.data.token);
 
-        console.log(response);
         return navigate('/');
       } catch (error) {
-        console.log(error);
-
         return setAlert({ error: true, message: error.response.data.error || error.response.data, showAlert: true });
       }
     } else {
