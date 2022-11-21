@@ -1,5 +1,5 @@
 import { Grid, Box, Typography, TextField, Button } from "@mui/material";
-import Logo from "../../assets/medcloud.svg";
+import Logo from "/assets/medcloud.svg";
 
 const SignUp = ({ signUpState, handleSignUp }) => {
   const { signUpForms, setSignUpForms } = signUpState;
