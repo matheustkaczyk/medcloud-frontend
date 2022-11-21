@@ -109,7 +109,7 @@ const Management = () => {
     }
 
     async function validate() {
-      await axiosInstance.get("/validate", {
+      await axiosInstance.post("/validate", {
         headers: {
           Authorization: token
         }
