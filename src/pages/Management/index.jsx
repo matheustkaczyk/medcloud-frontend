@@ -47,7 +47,7 @@ const Management = () => {
   const handleCreatePatient = async () => {
     if (newPatient.Firstname !== "" && newPatient.Lastname !== "" && newPatient.Email !== "" && newPatient.Address !== "") {
       try {
-        await axios.post('http://15.228.220.238:3000/patient', {
+        await axios.post('https://15.228.220.238:3000/patient', {
           firstName: newPatient.Firstname,
           lastName: newPatient.Lastname,
           email: newPatient.Email,
@@ -69,7 +69,7 @@ const Management = () => {
 
   const handleDeletePatient = async (id) => {
     try {
-      await axios.delete(`http://15.228.220.238:3000/patient/${id}`, {
+      await axios.delete(`https://15.228.220.238:3000/patient/${id}`, {
         headers: {
           Authorization: localStorage.getItem("token")
         }
@@ -83,7 +83,7 @@ const Management = () => {
 
   const handleEditPatient = async () => {
     try {
-      await axios.put(`http://15.228.220.238:3000/patient/${editedPatient.Id}`, {
+      await axios.put(`https://15.228.220.238:3000/patient/${editedPatient.Id}`, {
         firstName: editedPatient.Firstname,
         lastName: editedPatient.Lastname,
         address: editedPatient.Address,
@@ -108,7 +108,7 @@ const Management = () => {
     }
 
     async function validate() {
-      await axios.post("http://15.228.220.238:3000/validate", {}, {
+      await axios.post("https://15.228.220.238:3000/validate", {}, {
         headers: {
           Authorization: token,
         },
@@ -120,7 +120,7 @@ const Management = () => {
     };
 
     async function getPatientsData() {
-      await axios.get("http://15.228.220.238:3000/patient", {
+      await axios.get("https://15.228.220.238:3000/patient", {
         headers: {
           Authorization: token,
         },
