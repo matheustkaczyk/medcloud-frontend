@@ -78,7 +78,7 @@ const Login = () => {
           sm={4}
           md={6}
           sx={{
-            backgroundImage: 'url(./src/assets/bg-doctoring.jpg)',
+            backgroundImage: 'url(/assets/bg-doctoring.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
