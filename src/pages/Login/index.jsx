@@ -55,7 +55,7 @@ const Login = () => {
 
     if (signInForms.email !== '' && signInForms.password !== '') {
       try {
-        await axiosInstance.post('/signin', signInForms);
+        const response = await axiosInstance.post('/signin', signInForms);
 
         setAlert({ error: false, message: '', showAlert: true });
 
@@ -63,6 +63,7 @@ const Login = () => {
 
         return navigate('/');
       } catch (error) {
+        console.log(error);
         return setAlert({ error: true, message: error.response.data.error || error.response.data, showAlert: true });
       }
     } else {
