@@ -12,6 +12,7 @@ import ModalComponent from "../../components/Modal";
 import AlertComponent from "../../components/Alert";
 
 import forceRefresh from "../../utils/forceRefresh";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Management = () => {
   const [manager, setManager] = useState({});
@@ -47,7 +48,7 @@ const Management = () => {
   const handleCreatePatient = async () => {
     if (newPatient.Firstname !== "" && newPatient.Lastname !== "" && newPatient.Email !== "" && newPatient.Address !== "") {
       try {
-        await axios.post('http://15.228.220.238:3000/patient', {
+        await axiosInstance.post("/patient", {
           firstName: newPatient.Firstname,
           lastName: newPatient.Lastname,
           email: newPatient.Email,
@@ -69,7 +70,7 @@ const Management = () => {
 
   const handleDeletePatient = async (id) => {
     try {
-      await axios.delete(`http://15.228.220.238:3000/patient/${id}`, {
+      await axiosInstance.delete(`/patient/${id}`, {
         headers: {
           Authorization: localStorage.getItem("token")
         }
@@ -83,14 +84,14 @@ const Management = () => {
 
   const handleEditPatient = async () => {
     try {
-      await axios.put(`http://15.228.220.238:3000/patient/${editedPatient.Id}`, {
+      await axiosInstance.put(`/patient/${editedPatient.Id}`, {
         firstName: editedPatient.Firstname,
         lastName: editedPatient.Lastname,
-        address: editedPatient.Address,
-        email: editedPatient.Email
+        email: editedPatient.Email,
+        address: editedPatient.Address
       }, {
         headers: {
-          authorization: localStorage.getItem("token")
+          Authorization: localStorage.getItem("token")
         }
       });
 
@@ -108,10 +109,10 @@ const Management = () => {
     }
 
     async function validate() {
-      await axios.post("http://15.228.220.238:3000/validate", {}, {
+      await axiosInstance.get("/validate", {
         headers: {
-          Authorization: token,
-        },
+          Authorization: token
+        }
       }).then((response) => {
         setManager(response.data.user);
       }).catch((err) => {
@@ -120,10 +121,10 @@ const Management = () => {
     };
 
     async function getPatientsData() {
-      await axios.get("http://15.228.220.238:3000/patient", {
+      await axiosInstance.get("/patient", {
         headers: {
-          Authorization: token,
-        },
+          Authorization: token
+        }
       }).then((response) => {
         setPatientsData(response.data);
       }).catch(() => {

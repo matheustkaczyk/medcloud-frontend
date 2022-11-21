@@ -8,6 +8,8 @@ import SignIn from '../../components/SignIn';
 import SignUp from "../../components/SignUp";
 import AlertComponent from "../../components/Alert";
 
+import axiosInstance from "../../utils/axiosInstance";
+
 const Login = () => {
   const [signUp, setSignup] = useState(false);
   const [error, setAlert] = useState({ error: false, message: '', showAlert: false });
@@ -34,7 +36,7 @@ const Login = () => {
     if (signUpForms.firstName !== '' && signUpForms.lastName !== '' && signUpForms.birthDate !== '' && signUpForms.email !== '' && signUpForms.password !== '') {
       try {
         if (birthDateValidationRegex.test(signUpForms.birthDate)) {
-          await axios.post('http://15.228.220.238:3000/signup', signUpForms)
+          await axiosInstance.post('/signup', signUpForms);
           setAlert({ error: false, message: 'User sucessfully created', showAlert: true });
           return setSignup(false);
         } else {
@@ -53,7 +55,7 @@ const Login = () => {
 
     if (signInForms.email !== '' && signInForms.password !== '') {
       try {
-        const response = await axios.post('http://15.228.220.238:3000/signin', signInForms);
+        await axiosInstance.post('/signin', signInForms);
 
         setAlert({ error: false, message: '', showAlert: true });
 
