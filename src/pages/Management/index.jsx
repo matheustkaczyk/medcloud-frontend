@@ -26,7 +26,8 @@ const Management = () => {
     Id: "",
     Firstname: "",
     Lastname: "",
-    Address: ""
+    Address: "",
+    Email: ""
   });
   const [alert, setAlert] = useState({ error: false, message: '', showAlert: false });
   const [openModal, setOpenModal] = useState(false);
@@ -85,7 +86,8 @@ const Management = () => {
       await axios.put(`http://localhost:3000/patient/${editedPatient.Id}`, {
         firstName: editedPatient.Firstname,
         lastName: editedPatient.Lastname,
-        address: editedPatient.Address
+        address: editedPatient.Address,
+        email: editedPatient.Email
       }, {
         headers: {
           authorization: localStorage.getItem("token")

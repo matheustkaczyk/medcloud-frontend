@@ -12,12 +12,13 @@ const TableComponent = ({ columns, data, handleDelete, handleEdit, modalStyle, s
 
   const handleCloseModal = () => setOpenModal(false);
 
-  const handleEditInfo = (id, name, lastName, address) => {
+  const handleEditInfo = (id, name, lastName, address, email) => {
     setEditedPatient({
       Id: id,
       Firstname: name,
       Lastname: lastName,
-      Address: address
+      Address: address,
+      Email: email
     });
 
     handleOpenModal();
@@ -50,7 +51,7 @@ const TableComponent = ({ columns, data, handleDelete, handleEdit, modalStyle, s
                     `${row.createdAt.split('T')[0]} at ${row.createdAt.split('T')[1].split('.')[0]}`
                   }</TableCell>
                   <TableCell align="center" sx={{ display: "flex", justifyContent: "space-around" }}>
-                    <EditIcon onClick={() => handleEditInfo(row.id, row.name, row.last_name, row.address)} sx={{ cursor: "pointer", color: "orange" }} />
+                    <EditIcon onClick={() => handleEditInfo(row.id, row.name, row.last_name, row.address, row.email)} sx={{ cursor: "pointer", color: "orange" }} />
                     <DeleteIcon onClick={() => handleDelete(row.id)} sx={{ cursor: "pointer", color: "red" }} />
                   </TableCell>
                 </TableRow>
@@ -82,6 +83,14 @@ const TableComponent = ({ columns, data, handleDelete, handleEdit, modalStyle, s
                   required
                   defaultValue={editedPatient.Address}
                   onChange={(e) => setEditedPatient({ ...editedPatient, Address: e.target.value })}
+                />
+                <TextField
+                  sx={{ marginBottom: "2vh" }}
+                  label="Email"
+                  variant="filled"
+                  required
+                  defaultValue={editedPatient.Email}
+                  onChange={(e) => setEditedPatient({ ...editedPatient, Email: e.target.value })}
                 />
                 <Button
                   variant="contained"
