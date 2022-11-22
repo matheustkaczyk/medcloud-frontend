@@ -104,9 +104,9 @@ const Management = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    // if (!token) {
-    //   return handleLogout();
-    // }
+    if (!token) {
+      return handleLogout();
+    }
 
     async function validate() {
       await axiosInstance.post("/validate", {
